@@ -2,8 +2,8 @@
 
 ## Phase 0 - Absolute Networking Basics
 
-- [ ] Lab 1: Identify Network Devices
-- [ ] Lab 2: Cabling and Network Interfaces
+- [X] Lab 1: Identify Network Devices
+- [X] Lab 2: Cabling and Network Interfaces
 - [ ] Lab 3: Connect Two PCs Directly
 - [ ] Lab 4: Connect Two PCs Through a Switch
 - [ ] Lab 5: Build a Star Topology
