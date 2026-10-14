@@ -1,138 +1,405 @@
+# Lab 2: Network Interfaces and Cabling
 
+## 1. What Are Network Interfaces and Ports?
 
-# 1. What is a network interface?
+A **network interface** allows a device to send and receive data over a network.
 
-A network interface is the connection through which a device sends and receives network traffic.
+For example:
+- A PC uses an Ethernet interface for a wired connection.
+- A laptop may use an Ethernet interface and a wireless interface.
+- A switch has many interfaces to connect PCs, servers, and other network devices.
 
-For example, your laptop might have two network interfaces:
+A physical network interface is often called a **port**. In basic networking, these terms are frequently used interchangeably.
 
-- An Ethernet interface for a wired connection.
-- A wireless interface for Wi-Fi.
+### RJ-45 Ports and Connectors
 
-<img width="2048" height="1375" alt="image" src="https://github.com/user-attachments/assets/9a2cf29f-4928-49ee-84ac-cbb875595b77" />
+An RJ-45 port is the familiar Ethernet socket found on many PCs, routers, and switches.
 
+An RJ-45 connector is the plug at the end of a copper Ethernet cable that fits into the port.
 
-**Ethernet interface** : Connects to a wired network through an Ethernet cable.
+These connectors follow industry standards, allowing compatible devices and cables from different manufacturers to work together.
 
-<img width="1600" height="1067" alt="image" src="https://github.com/user-attachments/assets/64c78877-4367-4325-b7a0-2c47e4550d7d" />
+### Ethernet
 
+**Ethernet** is a family of networking standards and technologies used primarily for wired local area networks (LANs).
 
-**Wireless interface** : Connects to a Wi-Fi network using radio signals.
+It defines how devices communicate over Ethernet links, including aspects of cabling, signaling, and data transmission.
 
-A network interface is often provided by a NIC (Network Interface Card). It might be built into the motherboard rather than being a separate card.
+IEEE 802.3 is the main family of standards for Ethernet.
 
-<img width="678" height="688" alt="image" src="https://github.com/user-attachments/assets/a69a8347-5599-4b2c-a7f4-0587934744e2" />
+Network standards matter because devices need to follow compatible rules to communicate properly.
 
+---
 
-### How to read an interface name
+## 2. Network Speed: Bits and Bytes
 
-For example, `GigabitEthernet0/1` tells you that you're looking at a Gigabit Ethernet interface.
+Network speed is commonly measured in **bits per second (bps)**.
 
-On a switch, `FastEthernet0/1` usually means FastEthernet port 1 on that device. On a router, interface numbering depends on the device model.
+A bit is a binary value: `0` or `1`.
 
-You don't need to memorize every naming convention yet. Learn to identify the interface type and the port to which a cable should connect.
+A byte contains 8 bits.
 
-# 2. What is a network cable?
+### Common Units
 
-A network cable provides a physical path for signals to travel between devices. Different cables are designed for different types of connections.
+| Unit | Value |
+|---|---:|
+| 1 bit | One binary digit |
+| 1 byte | 8 bits |
+| 1 Kbps | 1,000 bits per second |
+| 1 Mbps | 1,000,000 bits per second |
+| 1 Gbps | 1,000,000,000 bits per second |
+| 1 Tbps | 1,000,000,000,000 bits per second |
 
-## The cables you should know
+Network speeds generally use decimal units, where each larger unit is 1,000 times the previous one.
 
+### Bits vs. Bytes
 
+Network speeds use bits, while file sizes are commonly displayed in bytes.
 
+For example:
+- `100 Mbps` means 100 million bits per second.
+- `100 MB` means 100 megabytes of data.
+- 100 Mbps is theoretically equivalent to 12.5 MB/s before protocol overhead and other limitations.
 
-1\. Copper straight-through Ethernet cable
+**Remember:** A byte contains 8 bits, so bits per second and bytes per second are not the same thing.
 
-<img width="1200" height="900" alt="image" src="https://github.com/user-attachments/assets/5a2aa096-61ad-494a-82d9-88c89ce33b9e" />
+---
 
-Used for common Ethernet connections, such as PC to switch and router to switch. It is one of the main cables you'll use in your Packet Tracer labs.
+## 3. Ethernet Standards and Speeds
 
+Ethernet standards specify supported speeds, cabling requirements, and other technical characteristics.
 
-2\. Copper crossover cable
+### Common Copper Ethernet Standards
 
-<img width="800" height="450" alt="image" src="https://github.com/user-attachments/assets/2f977632-be81-4e9c-8d18-e987b11d209d" />
+| Standard | Common name | Speed | Typical maximum copper channel length |
+|---|---|---:|---:|
+| 10BASE-T | Ethernet | 10 Mbps | 100 metres |
+| 100BASE-TX | Fast Ethernet | 100 Mbps | 100 metres |
+| 1000BASE-T | Gigabit Ethernet | 1 Gbps | 100 metres |
+| 10GBASE-T | 10 Gigabit Ethernet | 10 Gbps | 100 metres |
 
-Traditionally used to connect similar Ethernet interfaces directly, such as switch to switch or PC to PC. Modern equipment often supports Auto-MDI/MDIX, which can automatically accommodate either cable type. Packet Tracer may also handle some connections differently depending on the device.
+These are common examples using twisted-pair copper cabling.
 
+### Understanding the Names
 
-3\. Fiber-optic cable
+- **10, 100, 1000, 10G:** indicate the nominal data rate.
+- **BASE:** refers to baseband signaling.
+- **T:** indicates twisted-pair copper cabling in these standard names.
 
-<img width="1200" height="1200" alt="image" src="https://github.com/user-attachments/assets/f17519da-5cb0-4cce-b261-92ee319d64cb" />
+For example, `1000BASE-T` means Gigabit Ethernet over twisted-pair copper cable.
 
-Carries data using light. Used for high-speed connections and longer-distance links. Fiber requires compatible optical interfaces or transceivers at both ends.
+A cable and both connected interfaces must support compatible Ethernet standards to achieve the intended link speed.
 
-4\. Serial cable
+---
 
-<img width="691" height="566" alt="image" src="https://github.com/user-attachments/assets/9d9fde3d-dd83-4279-8cf1-94898a615863" />
+## 4. UTP Ethernet Cables
 
-Used with supported router interfaces in some simulated WAN connections.
+**UTP stands for Unshielded Twisted Pair.**
 
-You may encounter DCE and DTE ends in Packet Tracer. The exact configuration depends on the lab and router model.
+UTP cables are widely used to connect PCs, switches, routers, and other Ethernet devices.
 
+A typical UTP Ethernet cable contains:
+- Four pairs of twisted copper wires.
+- Eight individual wires in total.
+- An RJ-45 connector at each end.
 
-5\. Console cable
+### Why Are the Wires Twisted?
 
-<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/0bdb1156-6508-4024-902d-793ac94638c4" />
+The wires are twisted together in pairs to help reduce electromagnetic interference (EMI).
 
-Connects a computer's terminal interface to a network device's console port so you can configure it locally. It is not a cable for ordinary Ethernet communication. You may also encounter coaxial cables, which are used by cable internet systems and other technologies. You don't need to configure a coaxial internet connection for this basic Packet Tracer lab.
+Because UTP has no additional metallic shield around the pairs, it can still be affected by electrical interference.
 
-# 3. Which cable connects which devices?
+### How Many Wires Are Used?
 
-This is the most important part of the lab.
+For common Ethernet standards:
 
-| Connection                                  | Traditional cable choice                                   |
-| ------------------------------------------- | ---------------------------------------------------------- |
-| PC → Switch                                 | Straight-through                                           |
-| Router → Switch                             | Straight-through                                           |
-| Switch → Switch                             | Crossover                                                  |
-| PC → PC directly                            | Crossover                                                  |
-| Router → Router using Ethernet              | Crossover traditionally; depends on interface capabilities |
-| PC → Router console port                    | Console cable                                              |
-| Fiber-capable switch → Fiber-capable switch | Compatible fiber cable and interfaces                      |
+- **10BASE-T and 100BASE-TX:** use two pairs, or four wires.
+- **1000BASE-T and 10GBASE-T:** use all four pairs, or eight wires.
 
-Remember: these are traditional Ethernet cabling rules. Auto-MDI/MDIX allows many modern interfaces to work with either straight-through or crossover cables.
+Gigabit Ethernet and 10 Gigabit Ethernet over twisted-pair copper use all four pairs for bidirectional communication.
 
-In Packet Tracer, you can use the Automatically Choose Connection Type lightning-bolt tool when you're unsure. However, for this lab, practise choosing the cables yourself so you understand the distinction.
+### Advantages of UTP
 
-# 4. What is an Ethernet port?
+- Generally inexpensive.
+- Easy to install.
+- Commonly available.
+- Suitable for connecting end devices to access switches.
+- Supports common LAN speeds over distances up to 100 metres per channel when correctly installed.
 
-<img width="2000" height="1500" alt="image" src="https://github.com/user-attachments/assets/87fe60f4-16f2-4045-9f0f-bd1206ebef11" />
+### Limitations of UTP
 
-An Ethernet port is the physical socket into which you connect an Ethernet cable. For example, a switch might have these ports:
+- Twisted-pair copper Ethernet channels are generally limited to 100 metres.
+- Copper can be affected by electromagnetic interference.
+- Copper cabling can require more care around electrical noise than fiber-optic cabling.
 
-- `FastEthernet0/1`
-- `FastEthernet0/2`
-- `FastEthernet0/3`
-- `GigabitEthernet0/1`
+---
 
-If you connect a PC to `FastEthernet0/1`, that tells you which switch port the PC is connected to. This becomes useful later when you learn MAC address tables, VLANs, STP, and switch troubleshooting.
+## 5. Straight-Through Ethernet Cable
 
-## Port vs. interface
+A **straight-through cable** connects the corresponding pins at both ends.
 
-People often use these words interchangeably in basic networking.
+For example:
+- Pin 1 connects to pin 1.
+- Pin 2 connects to pin 2.
+- Pin 3 connects to pin 3.
 
-- Port: Often means the physical socket or connection point.
-- Interface: The network interface through which communication occurs. It may refer to a physical interface or a logical interface, depending on the context.
+### Common Traditional Uses
 
-For this lab, you can treat `FastEthernet0/1` as the particular physical network connection you select on a switch.
+- PC → Switch
+- Router → Switch
+- Server → Switch
+- Firewall → Switch
 
-<img width="695" height="401" alt="image" src="https://github.com/user-attachments/assets/b2fa9808-75e5-4585-98d7-cecd7710013e" />
+These devices traditionally use complementary transmit and receive pairs when connected in these combinations.
 
+### Basic Idea
 
-# 6. Speed, duplex and cable length
+A straight-through cable does not cross or swap the wiring pairs between its two ends.
 
-You don't need to master these topics today, but learn the basic definitions.
+---
 
-Speed is how fast an interface can transmit data. For example, 100 Mbps and 1 Gbps are different Ethernet speeds. The actual link rate depends on the capabilities and configuration of both ends.
+## 6. Crossover Ethernet Cable
 
-Duplex describes whether an Ethernet connection can send and receive simultaneously.
+A **crossover cable** swaps the relevant transmit and receive pairs between its ends.
 
-- Half-duplex: sends or receives at a time.
-- Full-duplex: can send and receive simultaneously.
+For traditional 10BASE-T and 100BASE-TX wiring, the important pins are:
 
-Modern switched Ethernet links generally use full-duplex operation. Duplex mismatches can cause poor performance and errors.
+- Pins 1 and 2.
+- Pins 3 and 6.
 
-Cable length: copper twisted-pair Ethernet commonly supports up to 100 metres per channel under the applicable cabling specifications. Fiber can support much longer distances, depending on the fiber type, transceivers, and link design.
+A traditional crossover cable connects:
+- Pin 1 on one end to pin 3 on the other end.
+- Pin 2 on one end to pin 6 on the other end.
+- Pin 3 on one end to pin 1 on the other end.
+- Pin 6 on one end to pin 2 on the other end.
 
-You don't need to calculate cable lengths in this lab. Just understand that cables and interfaces have technical limits.
+### Common Traditional Uses
+
+- PC → PC directly.
+- Switch → Switch.
+- Router → Router over Ethernet.
+- PC → Router over Ethernet.
+
+These examples assume compatible Ethernet interfaces that do not automatically adapt their transmit and receive wiring.
+
+### Straight-Through vs. Crossover
+
+| Feature | Straight-through | Crossover |
+|---|---|---|
+| Wiring | Corresponding pins connect straight through | Transmit and receive pairs are crossed |
+| Traditional use | PC-to-switch, router-to-switch | PC-to-PC, switch-to-switch |
+| Main purpose | Connect complementary interface types | Connect similar interface types that need crossed pairs |
+
+### Important: Auto-MDI/MDIX
+
+Many modern Ethernet interfaces support **Auto-MDI/MDIX**.
+
+This feature automatically detects and adapts to the wiring arrangement, allowing compatible devices to work with either a straight-through or crossover cable.
+
+Therefore, you usually do not need to worry about cable crossover rules when working with modern equipment.
+
+However, you should understand the traditional rules because they explain why certain older connections require specific cables.
+
+---
+
+## 7. Transmit and Receive Pins
+
+The lesson explains the traditional transmit/receive wiring used by 10BASE-T and 100BASE-TX Ethernet interfaces.
+
+- **Tx:** Transmit; sends data.
+- **Rx:** Receive; receives data.
+
+For traditional PC, router, and firewall interfaces:
+- Pins 1 and 2 transmit data.
+- Pins 3 and 6 receive data.
+
+For a traditional switch interface:
+- Pins 1 and 2 receive data.
+- Pins 3 and 6 transmit data.
+
+This difference explains why straight-through cables traditionally work between a PC and a switch, while crossover cables are used between similar interfaces.
+
+Modern Auto-MDI/MDIX can adapt to these differences automatically.
+
+You do not need to memorize every pin immediately, but understand how the transmit and receive pairs work.
+
+---
+
+## 8. Gigabit Ethernet and Higher Speeds
+
+1000BASE-T and 10GBASE-T use all four twisted pairs in the Ethernet cable.
+
+Unlike traditional 10BASE-T and 100BASE-TX, where transmit and receive functions use separate pairs, higher-speed twisted-pair Ethernet uses bidirectional signaling on the pairs.
+
+This means each pair participates in sending and receiving data.
+
+Using all four pairs helps support the higher data rates.
+
+**Key point:** Gigabit Ethernet is not simply Fast Ethernet operating faster. It uses different signaling techniques and all four pairs of the cable.
+
+---
+
+## 9. Fiber-Optic Cabling
+
+Fiber-optic cable carries data using pulses of light through glass or plastic fibers rather than electrical signals through copper wires.
+
+Fiber is commonly used for:
+- High-speed network connections.
+- Connections between switches.
+- Links between buildings.
+- Long-distance network connections.
+
+### Advantages of Fiber
+
+- Supports longer distances than ordinary twisted-pair copper Ethernet.
+- Supports high data rates.
+- Is resistant to electromagnetic interference.
+- Does not emit the same electrical signals outside the cable as copper wiring.
+
+Fiber can still be physically damaged and must be handled and installed correctly.
+
+### Limitations of Fiber
+
+- Equipment and transceivers can cost more.
+- Fiber and connectors require appropriate handling and cleaning.
+- Both ends need compatible optical interfaces and transceivers.
+
+---
+
+## 10. Structure of a Fiber-Optic Cable
+
+A fiber-optic cable contains several layers.
+
+1. **Core:** The central part through which light travels.
+2. **Cladding:** Surrounds the core and helps keep light confined within it.
+3. **Buffer or protective coating:** Protects the fiber.
+4. **Outer jacket:** Provides additional physical protection.
+
+The core and cladding are essential for guiding light through the fiber.
+
+### Transmit and Receive
+
+Many duplex fiber Ethernet connections use two separate fibers:
+- One carries transmitted data.
+- The other carries received data.
+
+The transmitting end of one fiber connects to the receiving end at the opposite device, and vice versa.
+
+Some fiber systems use different arrangements, so this describes a common duplex connection.
+
+---
+
+## 11. Single-Mode Fiber vs. Multimode Fiber
+
+There are two major types of optical fiber.
+
+### Multimode Fiber (MMF)
+
+Multimode fiber has a wider core that allows multiple modes of light to propagate.
+
+Characteristics:
+- Commonly used for shorter-distance links.
+- Often less expensive to use for suitable short-range applications.
+- Common in buildings and data centers.
+- Supported distances depend on the fiber grade, data rate, and transceiver.
+
+### Single-Mode Fiber (SMF)
+
+Single-mode fiber has a much narrower core and supports one propagation mode.
+
+Characteristics:
+- Commonly used for longer-distance links.
+- Supports much longer distances than typical multimode applications.
+- Often uses laser-based optical transmitters.
+- Equipment cost depends on the transceiver and application.
+
+### Comparison
+
+| Feature | Multimode | Single-mode |
+|---|---|---|
+| Core | Wider | Narrower |
+| Typical applications | Shorter links | Longer links |
+| Distance capability | Shorter than comparable single-mode links | Can support much longer links |
+| Equipment costs | Often economical for short-range links | Depends on the optic and link requirements |
+
+**Remember:** choose fiber based on the supported distance, data rate, optical equipment, and installation requirements—not just because one type is always cheaper.
+
+---
+
+## 12. SFP Transceivers
+
+**SFP stands for Small Form-factor Pluggable.**
+
+An SFP transceiver is a removable module that fits into a compatible port on a network device.
+
+It allows a switch or router to support an appropriate type of network connection.
+
+Depending on the module, it may support:
+- Fiber-optic connections.
+- Copper Ethernet connections.
+- Different speeds and distances.
+
+The device, module, fiber type, connectors, and link specifications must be compatible.
+
+For example, a compatible fiber SFP module can allow two switches to communicate over fiber-optic cable.
+
+### SFP and Fiber
+
+A common fiber connection consists of:
+- A compatible optical transceiver at each end.
+- A suitable fiber cable.
+- Transmit-to-receive connections between the two devices.
+
+Do not assume that every SFP module supports every fiber type or speed.
+
+---
+
+## 13. Common Fiber Ethernet Standards
+
+The lesson introduces several examples of fiber Ethernet standards.
+
+| Standard | Speed | Typical fiber type | Example maximum distance from the lesson |
+|---|---:|---|---:|
+| 1000BASE-LX | 1 Gbps | Single-mode or supported multimode | Up to 5 km on single-mode; up to 550 m on multimode in the example |
+| 10GBASE-SR | 10 Gbps | Multimode | Up to 400 m with suitable supported fiber |
+| 10GBASE-LR | 10 Gbps | Single-mode | Up to 10 km |
+| 10GBASE-ER | 10 Gbps | Single-mode | Up to 30 km |
+
+These distances are examples, not universal guarantees. Actual supported distances depend on the Ethernet specification, fiber type and grade, optical transceivers, and link design.
+
+You do not need to memorize every fiber standard for your first Packet Tracer lab. Focus on understanding why different types of fiber exist and how they are selected.
+
+---
+
+## 14. Copper UTP vs. Fiber-Optic Cable
+
+| Feature | Copper UTP | Fiber-optic |
+|---|---|---|
+| Signal | Electrical | Light |
+| Typical connector | RJ-45 | Depends on the fiber system |
+| Common use | PCs to access switches | Switch uplinks and longer links |
+| Typical maximum distance | 100 m per standard Ethernet channel | Depends on the optic and fiber type; can be much longer |
+| Interference | Can be affected by EMI | Resistant to EMI |
+| Cost | Often inexpensive for short links | Equipment and installation costs vary |
+| Security considerations | Can be vulnerable to physical tapping | Can also be tapped, though practical access and methods differ |
+
+Both technologies are important in modern networks. Copper is common for end devices, while fiber is common for high-speed uplinks and longer-distance connections.
+
+---
+
+## 15. Quick Revision: Which Cable Should You Choose?
+
+| Connection | Traditional choice |
+|---|---|
+| PC → Switch | Straight-through |
+| Router → Switch | Straight-through |
+| Switch → Switch | Crossover |
+| PC → PC directly | Crossover |
+| Router → Router over Ethernet | Crossover |
+| PC → Router console port | Console cable |
+| Switch → Switch over fiber | Compatible fiber transceivers and fiber cable |
+
+These are traditional examples. Auto-MDI/MDIX can remove the need for crossover cables on supported Ethernet interfaces.
+
+For Packet Tracer, the automatic connection tool is useful when you are unsure, but practise manual selection to learn the differences.
 
