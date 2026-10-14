@@ -1,16 +1,4 @@
-Bro, for Lab 2: Cabling and Network Interfaces, here's everything you need to learn as a beginner. I'll keep it practical and focused on Cisco Packet Tracer, so you can understand the concepts and complete the lab using the GUI.
 
-# Lab 2 — Cabling and Network Interfaces
-
-Learning objectives
-
-By the end of this lab, you should be able to:
-
-- Identify network ports and interfaces on PCs, switches, and routers.
-- Recognize common network cables.
-- Choose the appropriate cable for a connection.
-- Connect devices correctly in Packet Tracer.
-- Understand link lights and troubleshoot connection problems.
 
 # 1. What is a network interface?
 
