@@ -13,7 +13,7 @@ A physical network interface is often called a **port**. In basic networking, th
 
 ### RJ-45 Ports and Connectors
 
-An RJ-45 port is the familiar Ethernet socket found on many PCs, routers, and switches.
+An RJ-45 (RJ - Registered Jack) port is the familiar Ethernet socket found on many PCs, routers, and switches.
 
 An RJ-45 connector is the plug at the end of a copper Ethernet cable that fits into the port.
 
@@ -71,16 +71,9 @@ Ethernet standards specify supported speeds, cabling requirements, and other tec
 
 ### Common Copper Ethernet Standards
 
-| Standard | Common name | Speed | Typical maximum copper channel length |
-|---|---|---:|---:|
-| 10BASE-T | Ethernet | 10 Mbps | 100 metres |
-| 100BASE-TX | Fast Ethernet | 100 Mbps | 100 metres |
-| 1000BASE-T | Gigabit Ethernet | 1 Gbps | 100 metres |
-| 10GBASE-T | 10 Gigabit Ethernet | 10 Gbps | 100 metres |
+<img width="745" height="463" alt="image" src="https://github.com/user-attachments/assets/6c1c6289-9871-41a6-8409-9ebdf1d970a3" />
 
 These are common examples using twisted-pair copper cabling.
-
-### Understanding the Names
 
 - **10, 100, 1000, 10G:** indicate the nominal data rate.
 - **BASE:** refers to baseband signaling.
@@ -105,16 +98,15 @@ A typical UTP Ethernet cable contains:
 
 ### Why Are the Wires Twisted?
 
-The wires are twisted together in pairs to help reduce electromagnetic interference (EMI).
-
-Because UTP has no additional metallic shield around the pairs, it can still be affected by electrical interference.
+The wires are twisted together in pairs to help reduce electromagnetic interference (EMI). Because UTP has no additional metallic shield around the pairs, it can still be affected by electrical interference.
 
 ### How Many Wires Are Used?
 
 For common Ethernet standards:
 
-- **10BASE-T and 100BASE-TX:** use two pairs, or four wires.
+- **10BASE-T and 100BASE-T:** use two pairs, or four wires.
 - **1000BASE-T and 10GBASE-T:** use all four pairs, or eight wires.
+
 
 Gigabit Ethernet and 10 Gigabit Ethernet over twisted-pair copper use all four pairs for bidirectional communication.
 
@@ -150,6 +142,9 @@ For example:
 - Server → Switch
 - Firewall → Switch
 
+<img width="874" height="489" alt="image" src="https://github.com/user-attachments/assets/32114fe8-33aa-4ef5-8802-b48cc5d70b35" />
+
+<img width="870" height="438" alt="image" src="https://github.com/user-attachments/assets/a8958a81-8312-47b3-be88-c6d6d5f3ebb0" />
 These devices traditionally use complementary transmit and receive pairs when connected in these combinations.
 
 ### Basic Idea
@@ -180,7 +175,11 @@ A traditional crossover cable connects:
 - Router → Router over Ethernet.
 - PC → Router over Ethernet.
 
+<img width="869" height="489" alt="image" src="https://github.com/user-attachments/assets/fd6dedbc-2cfc-406a-b84d-4b7c9a07731f" />
+
 These examples assume compatible Ethernet interfaces that do not automatically adapt their transmit and receive wiring.
+
+<img width="871" height="486" alt="image" src="https://github.com/user-attachments/assets/21a812fa-3f75-499b-b5fd-2f687c27535d" />
 
 ### Straight-Through vs. Crossover
 
@@ -249,6 +248,10 @@ Fiber is commonly used for:
 - Links between buildings.
 - Long-distance network connections.
 
+<img width="867" height="451" alt="image" src="https://github.com/user-attachments/assets/451b9bcc-2a91-4c27-9cbd-b5fab2ffdb58" />
+
+<img width="535" height="445" alt="image" src="https://github.com/user-attachments/assets/f9dba1b5-069a-4466-a3d1-7ef47ca8ec1d" />
+
 ### Advantages of Fiber
 
 - Supports longer distances than ordinary twisted-pair copper Ethernet.
@@ -283,6 +286,8 @@ Many duplex fiber Ethernet connections use two separate fibers:
 - One carries transmitted data.
 - The other carries received data.
 
+<img width="869" height="392" alt="image" src="https://github.com/user-attachments/assets/25e72880-4136-4864-a412-e74a2a66f1a1" />
+
 The transmitting end of one fiber connects to the receiving end at the opposite device, and vice versa.
 
 Some fiber systems use different arrangements, so this describes a common duplex connection.
@@ -303,6 +308,8 @@ Characteristics:
 - Common in buildings and data centers.
 - Supported distances depend on the fiber grade, data rate, and transceiver.
 
+<img width="872" height="491" alt="image" src="https://github.com/user-attachments/assets/1a98eadc-7556-48f4-a624-cb9f20015eb9" />
+
 ### Single-Mode Fiber (SMF)
 
 Single-mode fiber has a much narrower core and supports one propagation mode.
@@ -312,6 +319,8 @@ Characteristics:
 - Supports much longer distances than typical multimode applications.
 - Often uses laser-based optical transmitters.
 - Equipment cost depends on the transceiver and application.
+
+<img width="858" height="479" alt="image" src="https://github.com/user-attachments/assets/f545da14-a975-4cf3-a43a-9f1c69c11967" />
 
 ### Comparison
 
@@ -323,6 +332,8 @@ Characteristics:
 | Equipment costs | Often economical for short-range links | Depends on the optic and link requirements |
 
 **Remember:** choose fiber based on the supported distance, data rate, optical equipment, and installation requirements—not just because one type is always cheaper.
+
+<img width="744" height="455" alt="image" src="https://github.com/user-attachments/assets/12986b20-6998-49f3-9e01-e6dbe75031c0" />
 
 ---
 
