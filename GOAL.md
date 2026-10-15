@@ -7,10 +7,10 @@
 - [X] Lab 3: Connect Two PCs Directly
 - [X] Lab 4: Connect Two PCs Through a Switch
 - [X] Lab 5: Build a Star Topology
-- [ ] Lab 6: Observe MAC Address Learning
-- [ ] Lab 7: Explore the OSI and TCP/IP Models
-- [ ] Lab 8: IPv4 Addressing and Subnet Masks
-- [ ] Lab 9: Same Subnet vs. Different Subnet
+- [X] Lab 6: Observe MAC Address Learning
+- [X] Lab 7: Explore the OSI and TCP/IP Models
+- [X] Lab 8: IPv4 Addressing and Subnet Masks
+- [X] Lab 9: Same Subnet vs. Different Subnet
 - [ ] Lab 10: Basic Network Troubleshooting
 
 ## Phase 1 - IPv4, Subnetting and Packet Delivery
