@@ -5,8 +5,8 @@
 - [X] Lab 1: Identify Network Devices
 - [X] Lab 2: Cabling and Network Interfaces
 - [X] Lab 3: Connect Two PCs Directly
-- [ ] Lab 4: Connect Two PCs Through a Switch
-- [ ] Lab 5: Build a Star Topology
+- [X] Lab 4: Connect Two PCs Through a Switch
+- [X] Lab 5: Build a Star Topology
 - [ ] Lab 6: Observe MAC Address Learning
 - [ ] Lab 7: Explore the OSI and TCP/IP Models
 - [ ] Lab 8: IPv4 Addressing and Subnet Masks
