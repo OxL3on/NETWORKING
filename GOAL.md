@@ -11,11 +11,11 @@
 - [X] Lab 7: Explore the OSI and TCP/IP Models
 - [X] Lab 8: IPv4 Addressing and Subnet Masks
 - [X] Lab 9: Same Subnet vs. Different Subnet
-- [ ] Lab 10: Basic Network Troubleshooting
+- [X] Lab 10: Basic Network Troubleshooting
 
 ## Phase 1 - IPv4, Subnetting and Packet Delivery
 
-- [ ] Lab 11: Convert IPv4 Addresses Between Decimal and Binary
+- [X] Lab 11: Convert IPv4 Addresses Between Decimal and Binary
 - [ ] Lab 12: Calculate Network, Broadcast and Host Addresses
 - [ ] Lab 13: Practice IPv4 Subnetting
 - [ ] Lab 14: Build Multiple Subnets
