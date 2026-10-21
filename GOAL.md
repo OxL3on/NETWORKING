@@ -16,7 +16,7 @@
 ## Phase 1 - IPv4, Subnetting and Packet Delivery
 
 - [X] Lab 11: Convert IPv4 Addresses Between Decimal and Binary
-- [ ] Lab 12: Calculate Network, Broadcast and Host Addresses
+- [X] Lab 12: Calculate Network, Broadcast and Host Addresses
 - [ ] Lab 13: Practice IPv4 Subnetting
 - [ ] Lab 14: Build Multiple Subnets
 - [ ] Lab 15: Design a Network Using VLSM
