@@ -1,122 +1,90 @@
 # Lab 13: Practice IPv4 Subnetting
 
-## Objective
+## Worked Example: Calculate Network, Broadcast and Host Addresses
 
-Practice calculating subnet masks, network addresses, broadcast addresses, usable host ranges, block sizes, and subnet capacities from IPv4 addresses and CIDR prefixes.
+**Given IP Address:** `172.22.91.50/20`
 
-## 1. Understand CIDR and Subnet Masks
+### Step 1: Calculate the Subnet Mask
 
-An IPv4 address contains 32 bits divided into four octets. A CIDR prefix indicates how many bits belong to the network portion.
+The `/20` prefix means the first 20 bits represent the network portion.
 
-Example:
+Subnet mask: `255.255.240.0`
 
-- IP address: `192.168.10.77/26`
-- Network bits: 26
-- Host bits: `32 - 26 = 6`
-- Subnet mask: `255.255.255.192`
+### Step 2: Calculate the Block Size
 
-## 2. Calculate Total and Usable Addresses
+The third octet is the interesting octet because its subnet-mask value is `240`.
 
-Formulas:
+Block Size = `256 - 240 = 16`
 
-- Host bits = `32 - prefix`
-- Total addresses = `2^host bits`
-- Conventional usable hosts = `2^host bits - 2`
+The third-octet ranges increase in increments of 16:
 
-For a `/26` subnet:
+`0–15, 16–31, 32–47, 48–63, 64–79, 80–95, 96–111, ...`
 
-- Host bits: `32 - 26 = 6`
-- Total addresses: `2^6 = 64`
-- Usable host addresses: `64 - 2 = 62`
+The given IP has `91` in its third octet, so it belongs to the `80–95` range.
 
-The network and broadcast addresses are excluded from the conventional usable-host count.
+### Step 3: Calculate the Network Address (NA)
 
-## 3. Find the Block Size
+Use the first value of the matching block and set the remaining host bits to zero.
 
-Identify the subnet-mask octet that is neither `255` nor `0`.
+**Network Address:** `172.22.80.0`
 
-Formula:
+### Step 4: Calculate the Broadcast Address (BA)
 
-`Block size = 256 - relevant subnet-mask octet`
+Use the last value of the matching block and set all host bits to one.
 
-For `/26`, the subnet mask is `255.255.255.192`.
+**Broadcast Address:** `172.22.95.255`
 
-`256 - 192 = 64`
+### Step 5: Calculate the First Usable Host (FHA)
 
-The subnet boundaries in the last octet are:
+Add `1` to the network address.
 
-`0, 64, 128, 192`
+`172.22.80.0 + 1 = 172.22.80.1`
 
-## 4. Calculate Network and Host Addresses
+**First Usable Host:** `172.22.80.1`
 
-Given:
+### Step 6: Calculate the Last Usable Host (LHA)
 
-`192.168.10.77/26`
+Subtract `1` from the broadcast address.
 
-The address `77` belongs to the block `64–127`.
+`172.22.95.255 - 1 = 172.22.95.254`
 
-Therefore:
+**Last Usable Host:** `172.22.95.254`
+
+### Step 7: Calculate Total and Usable Addresses
+
+IPv4 addresses contain 32 bits.
+
+Host Bits = `32 - 20 = 12`
+
+Total Addresses = `2^12 = 4,096`
+
+Usable Host Addresses = `4,096 - 2 = 4,094`
+
+The two excluded addresses are the network address and broadcast address.
+
+## Final Results
 
 | Property | Result |
 |---|---|
-| IP address | `192.168.10.77/26` |
-| Subnet mask | `255.255.255.192` |
-| Network address | `192.168.10.64` |
-| Broadcast address | `192.168.10.127` |
-| First usable host | `192.168.10.65` |
-| Last usable host | `192.168.10.126` |
-| Total addresses | 64 |
-| Usable host addresses | 62 |
+| IP Address | `172.22.91.50/20` |
+| Subnet Mask | `255.255.240.0` |
+| Block Size | 16 |
+| Network Address | `172.22.80.0` |
+| Broadcast Address | `172.22.95.255` |
+| First Usable Host | `172.22.80.1` |
+| Last Usable Host | `172.22.95.254` |
+| Total Addresses | 4,096 |
+| Usable Host Addresses | 4,094 |
 
-Procedure:
+## General Procedure
 
 1. Convert the CIDR prefix into a subnet mask.
-2. Calculate the block size in the relevant octet.
-3. Identify the block containing the given IP address.
-4. Use the block's first address as the network address.
-5. Use the block's last address as the broadcast address.
-6. Add one to the network address for the first host.
-7. Subtract one from the broadcast address for the last host.
-8. Calculate the usable host count.
+2. Identify the interesting octet.
+3. Calculate the block size using `256 - subnet-mask value`.
+4. Find the block containing the given IP address.
+5. Use the first address in the block as the network address.
+6. Use the last address in the block as the broadcast address.
+7. Add one to the network address and subtract one from the broadcast address to find the usable host range.
+8. Calculate total addresses using `2^(32 - prefix)` and conventional usable hosts by subtracting two.
 
-For prefixes such as `/13` and `/20`, the relevant octet may be the second or third octet instead of the fourth.
-
-## 5. Calculate a Subnet from Host Requirements
-
-Example: A network needs 50 usable host addresses.
-
-- 5 host bits provide `2^5 - 2 = 30` hosts.
-- 6 host bits provide `2^6 - 2 = 62` hosts.
-
-Therefore:
-
-`Prefix = 32 - 6 = /26`
-
-A `/26` is the smallest conventional IPv4 subnet that supports 50 hosts.
-
-## 6. Practice Tasks
-
-For each supplied IPv4 address and prefix, calculate:
-
-- Subnet mask
-- Network address
-- Broadcast address
-- First usable host
-- Last usable host
-- Total addresses
-- Usable host addresses
-
-Also practise selecting the smallest subnet for a required number of hosts and calculating subnet boundaries in the second and third octets.
-
-## 7. Verification Checklist
-
-- [ ] Correct subnet mask for the CIDR prefix
-- [ ] Correct block size
-- [ ] Correct network and broadcast addresses
-- [ ] Correct first and last usable hosts
-- [ ] Correct usable host count
-- [ ] Correct calculations for different CIDR prefixes
-
-## Key Takeaway
-
-IPv4 subnetting becomes manageable when the subnet mask, block size, address range, and host count are calculated systematically rather than guessed or memorized.
+**Key Takeaway:** The block size identifies the correct subnet range. Once the range is known, the network, broadcast, first host, last host, and usable host count can be calculated systematically.
