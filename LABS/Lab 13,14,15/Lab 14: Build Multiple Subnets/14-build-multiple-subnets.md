@@ -2,106 +2,173 @@
 
 ## Objective
 
-Divide a larger IPv4 network into multiple equal-sized subnets, assign addresses to devices, and verify connectivity using Cisco Packet Tracer.
+Divide `172.16.10.0/24` into four equal-sized IPv4 subnets, configure a router and four LANs in Cisco Packet Tracer, and verify connectivity within and between subnets.
 
-## 1. Network Requirements
+---
 
-Divide the network `192.168.20.0/24` into four equal-sized subnets.
+## Part 1: Calculate the Four Subnets
 
-Each subnet should support up to 30 usable host addresses.
+### Step 1: Calculate borrowed bits and the new prefix
 
-## 2. Calculate the Subnet Prefix
+Original network: `172.16.10.0/24`
 
-A `/24` network contains 256 total addresses.
+Required subnets: `4`
 
-To create four equal-sized subnets:
+Use the smallest number of borrowed bits that creates four subnets:
 
-`Number of borrowed bits = log2(4) = 2`
+- `2^1 = 2` subnets — not enough
+- `2^2 = 4` subnets — enough
 
-New prefix:
+Borrowed bits = `2`
 
-`/24 + 2 = /26`
+New prefix = `24 + 2 = /26`
 
-Each `/26` subnet has:
+### Step 2: Find the subnet mask and block size
 
-- Total addresses: `2^6 = 64`
-- Usable host addresses: `64 - 2 = 62`
-- Subnet mask: `255.255.255.192`
-- Block size: `256 - 192 = 64`
+A `/26` subnet has the mask:
 
-Each subnet therefore supports the required 30 hosts.
+- Binary: `11111111.11111111.11111111.11000000`
+- Decimal: `255.255.255.192`
 
-## 3. Calculate the Four Subnets
+The interesting octet is the fourth octet.
 
-| Subnet | Network address | First host | Last host | Broadcast |
-|---|---|---|---|---|
-| 1 | `192.168.20.0/26` | `192.168.20.1` | `192.168.20.62` | `192.168.20.63` |
-| 2 | `192.168.20.64/26` | `192.168.20.65` | `192.168.20.126` | `192.168.20.127` |
-| 3 | `192.168.20.128/26` | `192.168.20.129` | `192.168.20.190` | `192.168.20.191` |
-| 4 | `192.168.20.192/26` | `192.168.20.193` | `192.168.20.254` | `192.168.20.255` |
+`Block size = 256 - 192 = 64`
 
-All four subnets are equal in size and do not overlap.
+Therefore, the subnet network addresses increase by 64 in the fourth octet.
 
-## 4. Build the Topology in Packet Tracer
+### Step 3: Calculate total and usable addresses per subnet
 
-Required devices:
+Host bits = `32 - 26 = 6`
 
-- One router with four usable LAN interfaces, or a suitable supported interface module
+Total addresses per subnet:
+
+`2^6 = 64`
+
+Conventional usable host addresses:
+
+`64 - 2 = 62`
+
+The network address and broadcast address are excluded from the usable-host count. A router gateway address is still a usable host address.
+
+### Step 4: Calculate the network and broadcast addresses
+
+The four fourth-octet ranges are:
+
+- `0–63`
+- `64–127`
+- `128–191`
+- `192–255`
+
+| Subnet | Network address | Broadcast address |
+|---|---|---|
+| 1 | `172.16.10.0/26` | `172.16.10.63` |
+| 2 | `172.16.10.64/26` | `172.16.10.127` |
+| 3 | `172.16.10.128/26` | `172.16.10.191` |
+| 4 | `172.16.10.192/26` | `172.16.10.255` |
+
+### Step 5: Calculate the usable host range
+
+- First usable host = network address + 1
+- Last usable host = broadcast address - 1
+
+| Subnet | Network address | First usable host | Last usable host | Broadcast address | Total addresses | Usable hosts |
+|---|---|---|---|---|---:|---:|
+| 1 | `172.16.10.0` | `172.16.10.1` | `172.16.10.62` | `172.16.10.63` | 64 | 62 |
+| 2 | `172.16.10.64` | `172.16.10.65` | `172.16.10.126` | `172.16.10.127` | 64 | 62 |
+| 3 | `172.16.10.128` | `172.16.10.129` | `172.16.10.190` | `172.16.10.191` | 64 | 62 |
+| 4 | `172.16.10.192` | `172.16.10.193` | `172.16.10.254` | `172.16.10.255` | 64 | 62 |
+
+### Step 6: Verify the subnet count and address ranges
+
+The original `/24` network contains 256 addresses.
+
+`4 subnets × 64 addresses per subnet = 256 addresses`
+
+The ranges are consecutive and non-overlapping:
+
+- Subnet 1 ends at `172.16.10.63`; Subnet 2 begins at `172.16.10.64`.
+- Subnet 2 ends at `172.16.10.127`; Subnet 3 begins at `172.16.10.128`.
+- Subnet 3 ends at `172.16.10.191`; Subnet 4 begins at `172.16.10.192`.
+- Subnet 4 ends at `172.16.10.255`, the end of the original `/24` range.
+
+All four subnets fit exactly inside `172.16.10.0/24`, with no overlap.
+
+> **Note:** This lab calls for four subnets, not 16. The instruction about verifying 16 subnets belongs to a different practice problem. For this lab, verify all four subnets.
+
+---
+
+## Part 2: Packet Tracer Build Guide
+
+### 1. Devices required
+
+- One router with four usable, separately configurable Ethernet interfaces
 - Four switches
-- Two PCs per subnet
+- Eight PCs (two PCs per switch/subnet)
+- Copper straight-through cables for PC-to-switch and switch-to-router links
 
-Connect each switch to a separate router interface. Connect two PCs to each switch using copper straight-through cables.
+Use a router/interface combination that exposes four routed Ethernet interfaces in Packet Tracer. The exact model and module availability can vary. If your router only has two or three usable interfaces, begin with the available subnets or choose a supported model/module that provides four routed interfaces. Do not assume a Layer 2 EtherSwitch module automatically provides four routed interfaces.
 
-If your Packet Tracer router does not have enough Ethernet interfaces, use a compatible router/module or configure two subnets first and expand the topology when suitable interfaces are available.
+### 2. Build the topology
 
-## 5. Configure the Router Interfaces
+Create four separate LANs:
 
-Assign one gateway address to each subnet.
+- Router interface 1 → Switch 1 → PC1 and PC2
+- Router interface 2 → Switch 2 → PC3 and PC4
+- Router interface 3 → Switch 3 → PC5 and PC6
+- Router interface 4 → Switch 4 → PC7 and PC8
 
-| Subnet | Router gateway |
-|---|---|
-| Subnet 1 | `192.168.20.1/26` |
-| Subnet 2 | `192.168.20.65/26` |
-| Subnet 3 | `192.168.20.129/26` |
-| Subnet 4 | `192.168.20.193/26` |
+Use copper straight-through cables. Wait for the links to become active before testing.
 
-Configure each router interface with its assigned IP address and subnet mask. Enable the interfaces if necessary.
+### 3. Configure the router interfaces using the GUI
 
-## 6. Configure the PCs
+Open Router0, select the **Config** tab, and select each available Ethernet interface. For each interface, enter its IP address and subnet mask, then turn the interface **On** or enable it.
 
-Assign two unique IP addresses to the PCs in each subnet.
+| Router interface | IP address | Subnet mask |
+|---|---|---|
+| Interface 1 (Subnet 1) | `172.16.10.1` | `255.255.255.192` |
+| Interface 2 (Subnet 2) | `172.16.10.65` | `255.255.255.192` |
+| Interface 3 (Subnet 3) | `172.16.10.129` | `255.255.255.192` |
+| Interface 4 (Subnet 4) | `172.16.10.193` | `255.255.255.192` |
 
-Example:
+The exact interface names may be different on your router. Match each interface to the switch for its subnet. Each interface must be enabled. Because these are directly connected networks, the router learns their routes when the interfaces are configured and up; no static routes are needed for this topology.
 
-| Device | IP address | Mask | Default gateway |
+### 4. Configure the PCs
+
+For each PC, open **Desktop → IP Configuration**. Enter the IP address, subnet mask, and default gateway from the table below.
+
+| PC | IP address | Subnet mask | Default gateway |
 |---|---|---|---|
-| PC1 | `192.168.20.2` | `255.255.255.192` | `192.168.20.1` |
-| PC2 | `192.168.20.3` | `255.255.255.192` | `192.168.20.1` |
-| PC3 | `192.168.20.66` | `255.255.255.192` | `192.168.20.65` |
-| PC4 | `192.168.20.67` | `255.255.255.192` | `192.168.20.65` |
+| PC1 (Subnet 1) | `172.16.10.2` | `255.255.255.192` | `172.16.10.1` |
+| PC2 (Subnet 1) | `172.16.10.3` | `255.255.255.192` | `172.16.10.1` |
+| PC3 (Subnet 2) | `172.16.10.66` | `255.255.255.192` | `172.16.10.65` |
+| PC4 (Subnet 2) | `172.16.10.67` | `255.255.255.192` | `172.16.10.65` |
+| PC5 (Subnet 3) | `172.16.10.130` | `255.255.255.192` | `172.16.10.129` |
+| PC6 (Subnet 3) | `172.16.10.131` | `255.255.255.192` | `172.16.10.129` |
+| PC7 (Subnet 4) | `172.16.10.194` | `255.255.255.192` | `172.16.10.193` |
+| PC8 (Subnet 4) | `172.16.10.195` | `255.255.255.192` | `172.16.10.193` |
 
-Use the same pattern for the remaining subnets, ensuring each PC has a unique address in its assigned range.
+The router gateway is the first usable IP in each subnet. The two PCs in each LAN use unique addresses from that same subnet.
 
-## 7. Verify Connectivity
+### 5. Test communication within each subnet
 
-1. Check that connected links are active.
-2. Ping between PCs within the same subnet.
-3. Ping from a PC in one subnet to a PC in another subnet.
-4. Confirm that the router forwards traffic between the subnets.
-5. Use Packet Tracer Simulation Mode to observe ARP, ICMP, and router forwarding.
+On a PC, open **Desktop → Command Prompt** and use `ping` to test the other PC on the same switch.
 
-A successful same-subnet ping verifies local communication. A successful cross-subnet ping also verifies that the gateway and routing configuration work.
+Examples:
 
-## 8. Verification Checklist
+- From PC1: `ping 172.16.10.3`
+- From PC3: `ping 172.16.10.67`
+- From PC5: `ping 172.16.10.131`
+- From PC7: `ping 172.16.10.195`
 
-- [ ] Four equal-sized subnets calculated
-- [ ] No overlapping address ranges
-- [ ] Correct subnet mask on each device
-- [ ] Correct router gateway for each subnet
-- [ ] Successful same-subnet communication
-- [ ] Successful communication between subnets
-- [ ] Packet Tracer project saved
+A first ping may time out while ARP resolves MAC addresses. If that happens, try the ping again.
 
-## Key Takeaway
+### 6. Test communication between different subnets
 
-Subnetting divides an address range into smaller networks. Devices communicate within their subnet using Layer 2 forwarding, while communication between different IP subnets requires a router or another Layer 3 forwarding device.
+Try pings between PCs on different LANs. For example:
+
+- From PC1: `ping 172.16.10.66` (PC3 in Subnet 2)
+- From PC3: `ping 172.16.10.130` (PC5 in Subnet 3)
+- From PC7: `ping 172.16.10.2` (PC1 in Subnet 1)
+
+Successful pings confirm that the PCs, subnet masks, default gateways, router interfaces, and inter-subnet routing are configured correctly.
+
