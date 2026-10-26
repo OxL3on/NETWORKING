@@ -171,4 +171,4 @@ Try pings between PCs on different LANs. For example:
 
 Successful pings confirm that the PCs, subnet masks, default gateways, router interfaces, and inter-subnet routing are configured correctly.
 
-<img width="1100" height="511" alt="image" src="https://github.com/user-attachments/assets/413100a8-9763-4098-b02a-3ae16bdae02d" />
+<img width="1466" height="504" alt="image" src="https://github.com/user-attachments/assets/ca22adaa-f630-4ff3-b5a2-6e263b5cb242" />
