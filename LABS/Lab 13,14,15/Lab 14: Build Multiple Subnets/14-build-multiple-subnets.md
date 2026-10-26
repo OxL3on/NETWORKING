@@ -93,7 +93,6 @@ The ranges are consecutive and non-overlapping:
 
 All four subnets fit exactly inside `172.16.10.0/24`, with no overlap.
 
-> **Note:** This lab calls for four subnets, not 16. The instruction about verifying 16 subnets belongs to a different practice problem. For this lab, verify all four subnets.
 
 ---
 
@@ -172,3 +171,4 @@ Try pings between PCs on different LANs. For example:
 
 Successful pings confirm that the PCs, subnet masks, default gateways, router interfaces, and inter-subnet routing are configured correctly.
 
+<img width="1100" height="511" alt="image" src="https://github.com/user-attachments/assets/413100a8-9763-4098-b02a-3ae16bdae02d" />
