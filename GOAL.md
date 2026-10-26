@@ -17,8 +17,8 @@
 
 - [X] Lab 11: Convert IPv4 Addresses Between Decimal and Binary
 - [X] Lab 12: Calculate Network, Broadcast and Host Addresses
-- [ ] Lab 13: Practice IPv4 Subnetting
-- [ ] Lab 14: Build Multiple Subnets
+- [X] Lab 13: Practice IPv4 Subnetting
+- [X] Lab 14: Build Multiple Subnets
 - [ ] Lab 15: Design a Network Using VLSM
 - [ ] Lab 16: Identify Public, Private, Loopback and Link-Local Addresses
 - [ ] Lab 17: Explore ARP and MAC Address Resolution
