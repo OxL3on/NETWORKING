@@ -1,132 +1,119 @@
 # Lab 15: Design a Network Using VLSM
 
 ## Objective
+Allocate different-sized subnets based on each department's host requirements using VLSM (Variable Length Subnet Masking).
 
-Design a network using Variable Length Subnet Masking (VLSM), allocating different-sized subnets based on host requirements while avoiding overlapping address ranges.
+## Problem
 
-## 1. Network Requirements
+Available Network: `172.16.0.0/23`
 
-The organization has the address block:
-
-`192.168.50.0/24`
-
-It needs four subnets:
-
-| Department | Required hosts |
+| Department | Hosts Required |
 |---|---:|
-| Department A | 100 |
-| Department B | 50 |
-| Department C | 20 |
-| Department D | 10 |
+| Engineering | 180 |
+| Operations | 90 |
+| IT | 45 |
+| Management | 20 |
 
-## 2. Sort the Requirements
+## Step 1: Check the Original Network
 
-Always start with the largest host requirement.
+A `/23` network contains:
 
-Order:
+- Total addresses: `2^(32-23) = 512`
+- Address range: `172.16.0.0 – 172.16.1.255`
 
-1. Department A — 100 hosts
-2. Department B — 50 hosts
-3. Department C — 20 hosts
-4. Department D — 10 hosts
+Allocate the largest subnet first to avoid wasting address space.
 
-This helps prevent smaller subnet allocations from consuming address space needed by a larger subnet.
+## Step 2: Calculate Each Subnet
 
-## 3. Calculate the Required Prefix for Each Department
+### 1. Engineering — 180 Hosts
 
-Select the smallest conventional subnet that provides enough usable hosts.
+- 7 host bits provide 126 usable hosts (not enough).
+- 8 host bits provide 254 usable hosts.
+- Prefix: `32 - 8 = /24`
+- Subnet mask: `255.255.255.0`
 
-### Department A: 100 hosts
+Allocate: `172.16.0.0/24`
+
+- Network: `172.16.0.0`
+- First host: `172.16.0.1`
+- Last host: `172.16.0.254`
+- Broadcast: `172.16.0.255`
+
+Next available address: `172.16.1.0`
+
+### 2. Operations — 90 Hosts
 
 - 7 host bits provide `2^7 - 2 = 126` usable hosts.
-- Prefix: `32 - 7 = /25`.
-- Subnet mask: `255.255.255.128`.
+- Prefix: `32 - 7 = /25`
+- Subnet mask: `255.255.255.128`
+- Block size: `256 - 128 = 128`
 
-Allocate `192.168.50.0/25`.
+Allocate: `172.16.1.0/25`
 
-### Department B: 50 hosts
+- Network: `172.16.1.0`
+- First host: `172.16.1.1`
+- Last host: `172.16.1.126`
+- Broadcast: `172.16.1.127`
+
+Next available address: `172.16.1.128`
+
+### 3. IT — 45 Hosts
 
 - 6 host bits provide `2^6 - 2 = 62` usable hosts.
-- Prefix: `/26`.
-- Subnet mask: `255.255.255.192`.
+- Prefix: `32 - 6 = /26`
+- Subnet mask: `255.255.255.192`
+- Block size: `256 - 192 = 64`
 
-The next available boundary after the `/25` subnet is `192.168.50.128`.
+Allocate: `172.16.1.128/26`
 
-Allocate `192.168.50.128/26`.
+- Network: `172.16.1.128`
+- First host: `172.16.1.129`
+- Last host: `172.16.1.190`
+- Broadcast: `172.16.1.191`
 
-### Department C: 20 hosts
+Next available address: `172.16.1.192`
+
+### 4. Management — 20 Hosts
 
 - 5 host bits provide `2^5 - 2 = 30` usable hosts.
-- Prefix: `/27`.
-- Subnet mask: `255.255.255.224`.
+- Prefix: `32 - 5 = /27`
+- Subnet mask: `255.255.255.224`
+- Block size: `256 - 224 = 32`
 
-The next available boundary is `192.168.50.192`.
+Allocate: `172.16.1.192/27`
 
-Allocate `192.168.50.192/27`.
+- Network: `172.16.1.192`
+- First host: `172.16.1.193`
+- Last host: `172.16.1.222`
+- Broadcast: `172.16.1.223`
 
-### Department D: 10 hosts
+## Step 3: Final VLSM Table
 
-- 4 host bits provide `2^4 - 2 = 14` usable hosts.
-- Prefix: `/28`.
-- Subnet mask: `255.255.255.240`.
+| Department | Network / Prefix | Usable Host Range | Broadcast |
+|---|---|---|---|
+| Engineering | `172.16.0.0/24` | `172.16.0.1–254` | `172.16.0.255` |
+| Operations | `172.16.1.0/25` | `172.16.1.1–126` | `172.16.1.127` |
+| IT | `172.16.1.128/26` | `172.16.1.129–190` | `172.16.1.191` |
+| Management | `172.16.1.192/27` | `172.16.1.193–222` | `172.16.1.223` |
 
-The next available boundary is `192.168.50.224`.
+## Step 4: Verify Address Space
 
-Allocate `192.168.50.224/28`.
+Total allocated addresses:
 
-## 4. Final VLSM Allocation Table
+`256 + 128 + 64 + 32 = 480`
 
-| Department | Prefix | Network address | Usable host range | Broadcast |
-|---|---|---|---|---|
-| A | `/25` | `192.168.50.0` | `192.168.50.1–126` | `192.168.50.127` |
-| B | `/26` | `192.168.50.128` | `192.168.50.129–190` | `192.168.50.191` |
-| C | `/27` | `192.168.50.192` | `192.168.50.193–222` | `192.168.50.223` |
-| D | `/28` | `192.168.50.224` | `192.168.50.225–238` | `192.168.50.239` |
+Original network: `512` addresses.
 
-These allocations fit inside `192.168.50.0/24` and do not overlap.
+Remaining: `512 - 480 = 32` addresses.
 
-Remaining addresses: `192.168.50.240–192.168.50.255`, a total of 16 addresses that can be reserved or allocated later if requirements permit.
+Unused block: `172.16.1.224/27`
 
-## 5. Build the Network in Packet Tracer
-
-Required devices:
-
-- One router with enough interfaces for the proposed subnets, or an appropriate supported design
-- One switch per department
-- At least two PCs per department
-
-Connect the switches to their corresponding router interfaces. Configure the router gateway address for each subnet using the first usable address.
-
-Example:
-
-| Department | Gateway |
-|---|---|
-| A | `192.168.50.1/25` |
-| B | `192.168.50.129/26` |
-| C | `192.168.50.193/27` |
-| D | `192.168.50.225/28` |
-
-Assign unique host addresses, correct subnet masks, and the appropriate default gateway to each PC.
-
-## 6. Verify the Design
-
-1. Confirm that every PC has an address within its allocated subnet.
-2. Confirm that no network or broadcast address is assigned to a PC.
-3. Verify local communication within each department.
-4. Verify communication between departments through the router.
-5. Use Simulation Mode to inspect ARP, ICMP, and packet forwarding.
-
-## 7. Verification Checklist
-
-- [ ] Host requirements sorted from largest to smallest
-- [ ] Smallest suitable prefix selected for each department
-- [ ] Correct network and broadcast addresses calculated
-- [ ] No overlapping subnet allocations
-- [ ] Every subnet fits inside the original `/24`
-- [ ] Correct gateway and mask assigned to each device
-- [ ] Communication verified within and between departments
-- [ ] Packet Tracer project saved
+All subnets fit inside the original `/23` without overlapping.
 
 ## Key Takeaway
 
-VLSM conserves IPv4 address space by assigning subnet sizes according to actual host requirements. Allocate the largest subnet first, calculate each network boundary carefully, and verify that all address ranges remain non-overlapping.
+1. Sort host requirements from largest to smallest.
+2. Find the smallest prefix that supports each requirement.
+3. Allocate each subnet at the next valid network boundary.
+4. Calculate network, broadcast, and usable host ranges.
+5. Verify that all subnets fit inside the original network without overlap.
