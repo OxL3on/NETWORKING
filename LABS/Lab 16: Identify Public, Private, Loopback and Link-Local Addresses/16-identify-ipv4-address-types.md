@@ -41,3 +41,15 @@ Range: `169.254.0.0/16`
 Example: `169.254.20.15`
 
 These addresses are not forwarded by routers.
+
+## Common Special-Purpose IPv4 Addresses
+
+| IP Address / Range | Purpose |
+|---|---|
+| `192.0.2.0/24` | Documentation (TEST-NET-1) |
+| `198.51.100.0/24` | Documentation (TEST-NET-2) |
+| `203.0.113.0/24` | Documentation (TEST-NET-3) |
+| `224.0.0.0/4` | Multicast |
+| `255.255.255.255` | Limited broadcast |
+
+Special-purpose IPv4 addresses are reserved for specific functions and are not ordinary public or private host addresses.
