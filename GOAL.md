@@ -19,11 +19,11 @@
 - [X] Lab 12: Calculate Network, Broadcast and Host Addresses
 - [X] Lab 13: Practice IPv4 Subnetting
 - [X] Lab 14: Build Multiple Subnets
-- [ ] Lab 15: Design a Network Using VLSM
-- [ ] Lab 16: Identify Public, Private, Loopback and Link-Local Addresses
-- [ ] Lab 17: Explore ARP and MAC Address Resolution
-- [ ] Lab 18: Observe ICMP Requests, Replies and Errors
-- [ ] Lab 19: Compare TCP and UDP Traffic
+- [X] Lab 15: Design a Network Using VLSM
+- [X] Lab 16: Identify Public, Private, Loopback and Link-Local Addresses
+- [X] Lab 17: Explore ARP and MAC Address Resolution
+- [X] Lab 18: Observe ICMP Requests, Replies and Errors
+- [X] Lab 19: Compare TCP and UDP Traffic
 - [ ] Lab 20: Troubleshoot an Incorrect IP Addressing Plan
 
 ## Phase 2 - Routers and Basic Routing
