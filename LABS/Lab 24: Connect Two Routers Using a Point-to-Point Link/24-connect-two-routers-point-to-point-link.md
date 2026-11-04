@@ -93,3 +93,34 @@ Connecting two routers does not automatically allow their LANs to communicate. R
 ## Result
 
 Successfully connected two routers using a serial point-to-point link and verified communication using ping.
+
+
+
+
+## commands
+```
+enable
+configure terminal
+interface serial 0/3/0
+ip address 10.0.0.1 255.255.255.252
+clock rate 64000
+no shutdown
+exit
+```
+
+```
+enable
+configure terminal
+interface serial 0/3/0
+ip address 10.0.0.2 255.255.255.252
+no shutdown
+exit
+```
+
+```
+show ip interface brief
+show controllers serial 0/3/0
+clock rate ?
+ping 10.0.0.2
+ping 10.0.0.1
+```
