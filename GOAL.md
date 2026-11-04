@@ -29,9 +29,9 @@
 ## Phase 2 - Routers and Basic Routing
 
 - [X] Lab 21: Connect Two LANs Through a Router
-- [ ] Lab 22: Configure Two Directly Connected Networks
-- [ ] Lab 23: Connect Three LANs to One Router
-- [ ] Lab 24: Connect Two Routers Using a Point-to-Point Link
+- [X] Lab 22: Configure Two Directly Connected Networks
+- [X] Lab 23: Connect Three LANs to One Router
+- [X] Lab 24: Connect Two Routers Using a Point-to-Point Link
 - [ ] Lab 25: Configure Static Routes Between Two Routers
 - [ ] Lab 26: Configure Static Routing Across Three Routers
 - [ ] Lab 27: Configure a Default Route
