@@ -123,3 +123,5 @@ ping 192.168.30.20
 ```
 
 All should succeed after the network is configured correctly.
+
+<img width="845" height="490" alt="image" src="https://github.com/user-attachments/assets/aa909197-e502-4520-8323-01425933a55a" />
