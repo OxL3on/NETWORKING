@@ -6,7 +6,11 @@
 
 A router can connect multiple LANs using multiple network interfaces.
 
-Each interface belongs to a different IP network and acts as the default gateway for that LAN.
+Each interface belongs to a different IP network and acts as the default gateway for that LAN. It reinforces that:
+- One router can connect multiple LANs.
+- Each LAN needs its own router interface and subnet.
+- The router automatically learns directly connected routes.
+- No static routes are needed for directly connected networks.
 
 For this lab, we'll use:
 
