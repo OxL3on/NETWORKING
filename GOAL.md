@@ -32,9 +32,9 @@
 - [X] Lab 22: Configure Two Directly Connected Networks
 - [X] Lab 23: Connect Three LANs to One Router
 - [X] Lab 24: Connect Two Routers Using a Point-to-Point Link
-- [ ] Lab 25: Configure Static Routes Between Two Routers
-- [ ] Lab 26: Configure Static Routing Across Three Routers
-- [ ] Lab 27: Configure a Default Route
+- [X] Lab 25: Configure Static Routes Between Two Routers
+- [X] Lab 26: Configure Static Routing Across Three Routers
+- [X] Lab 27: Configure a Default Route
 - [ ] Lab 28: Configure Floating Static Routes
 - [ ] Lab 29: Compare Connected, Static and Default Routes
 - [ ] Lab 30: Troubleshoot Basic Routing Failures
