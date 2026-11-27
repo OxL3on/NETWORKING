@@ -28,6 +28,8 @@ A routing table gets its entries from different sources. This lab puts all three
 PC1 - SW1 - R1 --(Link A)-- R2 --(Link B)-- R3 - SW3 - Server
 ```
 
+<img width="922" height="395" alt="image" src="https://github.com/user-attachments/assets/4cd75720-c2c0-4f7e-b92d-a3f9738e5827" />
+
 **R2 is the star of this lab.** It will have connected, static and default routes at the same time.
 
 Use 3 routers (2911), 2 switches (2960), 1 PC, 1 server. You can copy your Lab 27 file and adjust it.
